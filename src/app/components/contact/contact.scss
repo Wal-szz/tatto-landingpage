@@ -1,0 +1,182 @@
+/*
+ * ESTILOS CONTACT
+ *
+ * El formulario usa un grid de 2 columnas en desktop.
+ * La clase .contact__field--full hace que el textarea ocupe ambas columnas.
+ *
+ * Los estados de validación se muestran con bordes de color:
+ * - Normal: borde gris
+ * - Foco: borde dorado
+ * - Inválido: borde rojizo
+ */
+
+:host {
+  display: block;
+}
+
+.contact-section {
+  padding: 6rem 0;
+  background-color: var(--color-dark);
+}
+
+/* ── Formulario ──────────────────────────────────────────────── */
+.contact__form {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.contact__form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columnas iguales */
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Campo de formulario ─────────────────────────────────────── */
+.contact__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  /* Ocupa ambas columnas del grid */
+  &--full {
+    grid-column: 1 / -1; /* 1 = primera línea, -1 = última línea del grid */
+  }
+}
+
+.contact__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-white);
+  letter-spacing: 0.03em;
+
+  /* El asterisco (*) de campo requerido */
+  span {
+    color: var(--color-gold);
+    margin-left: 2px;
+  }
+}
+
+/* Estilos base compartidos para input, select y textarea */
+.contact__input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background-color: var(--color-dark-gray);
+  border: 1px solid var(--color-mid-gray);
+  border-radius: 4px;
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  appearance: none; /* Elimina estilos nativos del navegador */
+
+  &::placeholder {
+    color: #555;
+  }
+
+  /* Estado de foco: borde dorado */
+  &:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+  }
+
+  /* Estado inválido (clase añadida por Angular cuando hay error de validación) */
+  &--invalid {
+    border-color: #c0392b;
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.1);
+  }
+}
+
+.contact__select {
+  cursor: pointer;
+  /* Flecha personalizada usando SVG inline como background */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6 9l6 6 6-6' stroke='%23888' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 20px;
+  padding-right: 2.5rem;
+
+  option {
+    background-color: var(--color-dark-gray);
+    color: var(--color-white);
+  }
+}
+
+.contact__textarea {
+  resize: vertical; /* Solo permite redimensionar verticalmente */
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+/* ── Mensaje de error ────────────────────────────────────────── */
+.contact__error {
+  font-size: 0.8rem;
+  color: #e74c3c;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+
+  &::before {
+    content: '⚠';
+    font-size: 0.75rem;
+  }
+}
+
+/* ── Pie del formulario ──────────────────────────────────────── */
+.contact__form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.contact__required-note {
+  font-size: 0.8rem;
+  color: var(--color-light-gray);
+}
+
+/* ── Estado de éxito post-envío ──────────────────────────────── */
+.contact__success {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 3rem 2rem;
+  background-color: var(--color-dark-gray);
+  border-radius: 6px;
+  border: 1px solid var(--color-gold);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+
+  h3 {
+    font-size: 1.8rem;
+    color: var(--color-gold);
+  }
+
+  p {
+    color: var(--color-light-gray);
+    line-height: 1.6;
+  }
+}
+
+.contact__success-icon {
+  width: 64px;
+  height: 64px;
+
+  svg { width: 100%; height: 100%; }
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .contact__form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact__form-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

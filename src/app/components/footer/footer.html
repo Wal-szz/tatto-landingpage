@@ -1,0 +1,110 @@
+<!--
+  TEMPLATE FOOTER
+
+  Pie de página con:
+  - Logo del estudio
+  - Descripción breve
+  - Links de navegación
+  - Íconos de redes sociales (SVG inline para evitar dependencias externas)
+  - Copyright con año dinámico
+
+  currentYear() → llamamos al computed() para obtener el año actual.
+  Un computed() se llama igual que un signal: con paréntesis.
+-->
+<footer class="footer" role="contentinfo">
+  <div class="footer__inner section-container">
+
+    <!-- ── Columna Marca ─────────────────────────────────────── -->
+    <div class="footer__brand">
+      <a href="#hero" class="footer__logo" aria-label="Ink & Soul — Ir al inicio">
+        <span class="footer__logo-main">Ink</span>
+        <span class="footer__logo-sep">&amp;</span>
+        <span class="footer__logo-accent">Soul</span>
+      </a>
+      <p class="footer__tagline">
+        Arte permanente para almas libres.<br>
+        Chillán, Región de Ñuble · Est. 2014
+      </p>
+    </div>
+
+    <!-- ── Columna Navegación ─────────────────────────────────── -->
+    <nav class="footer__nav" aria-label="Navegación del pie de página">
+      <h3 class="footer__nav-title">Navegación</h3>
+      <ul role="list">
+        @for (link of navLinks; track link.href) {
+          <li>
+            <a [href]="link.href" class="footer__link">{{ link.label }}</a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <!-- ── Columna Contacto ───────────────────────────────────── -->
+    <div class="footer__contact">
+      <h3 class="footer__nav-title">Encuéntranos</h3>
+      <address class="footer__address">
+        <p>Arauco 560, Chillán</p>
+        <p>Región de Ñuble, Chile</p>
+        <p>
+          <a href="tel:+56942123456" class="footer__link">+56 9 4212 3456</a>
+        </p>
+        <p>
+          <a href="mailto:hola@inkandsoul.cl" class="footer__link">hola&#64;inkandsoul.cl</a>
+        </p>
+      </address>
+
+      <!-- Redes Sociales con SVG inline -->
+      <div class="footer__social" aria-label="Redes sociales">
+
+        <!-- Instagram -->
+        <a
+          href="https://instagram.com/inkandsoul.chillan"
+          class="footer__social-link"
+          aria-label="Síguenos en Instagram @inkandsoul.chillan"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+          </svg>
+        </a>
+
+        <!-- Facebook -->
+        <a
+          href="https://facebook.com/inkandsoul.chillan"
+          class="footer__social-link"
+          aria-label="Síguenos en Facebook Ink & Soul Chillán"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </a>
+
+        <!-- TikTok -->
+        <a
+          href="https://tiktok.com/@inkandsoul.chillan"
+          class="footer__social-link"
+          aria-label="Síguenos en TikTok @inkandsoul.chillan"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Barra inferior con copyright -->
+  <div class="footer__bottom">
+    <p>
+      <!-- currentYear() → el año se calcula dinámicamente con computed() -->
+      &copy; {{ currentYear() }} Ink &amp; Soul. Todos los derechos reservados.
+    </p>
+  </div>
+</footer>

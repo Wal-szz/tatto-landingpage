@@ -1,0 +1,10 @@
+/*
+ * ESTILOS DEL COMPONENTE RAÍZ
+ *
+ * :host → selector que apunta al elemento <app-root> en el DOM.
+ * display: block es necesario porque los custom elements son inline por defecto.
+ */
+:host {
+  display: block;
+  min-height: 100dvh;
+}

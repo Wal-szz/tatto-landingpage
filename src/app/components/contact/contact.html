@@ -1,0 +1,160 @@
+<!--
+  TEMPLATE CONTACT
+
+  Formulario reactivo de Angular.
+
+  Conexión template ↔ TypeScript:
+  - [formGroup]="form"          → conecta este <form> al FormGroup definido en contact.ts
+  - formControlName="name"      → conecta un <input> al FormControl llamado "name"
+  - (ngSubmit)="onSubmit()"     → llama a onSubmit() cuando se envía el formulario
+  - [class.invalid]="showError()" → añade clase CSS si hay error de validación
+
+  Los formularios reactivos viven en la clase TypeScript, no en el HTML.
+  El HTML solo "refleja" el estado del formulario.
+-->
+<section id="contact" class="contact-section" aria-labelledby="contact-title">
+  <div class="section-container">
+
+    <h2 id="contact-title" class="section-title">Agenda Tu Sesión</h2>
+    <p class="section-subtitle">
+      Cuéntanos tu idea y la convertiremos en arte permanente
+    </p>
+
+    @if (submitted()) {
+      <!-- Estado de éxito post-envío -->
+      <div class="contact__success" role="alert" aria-live="polite">
+        <div class="contact__success-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="11" stroke="#C9A84C" stroke-width="1.5"/>
+            <path d="M7 12l3.5 3.5L17 8" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>¡Mensaje Enviado!</h3>
+        <p>Nos pondremos en contacto contigo en las próximas 24 horas para coordinar tu sesión.</p>
+        <button class="btn-primary" type="button" (click)="submitted.set(false)">
+          Enviar Otro Mensaje
+        </button>
+      </div>
+
+    } @else {
+      <!-- Formulario de contacto -->
+      <form
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        class="contact__form"
+        novalidate
+        aria-label="Formulario de contacto"
+      >
+        <div class="contact__form-grid">
+
+          <!-- ── Campo: Nombre ─────────────────────────────── -->
+          <div class="contact__field">
+            <label for="contact-name" class="contact__label">
+              Nombre Completo <span aria-hidden="true">*</span>
+            </label>
+            <input
+              id="contact-name"
+              type="text"
+              formControlName="name"
+              class="contact__input"
+              [class.contact__input--invalid]="showError('name')"
+              placeholder="Tu nombre"
+              autocomplete="name"
+              [attr.aria-invalid]="showError('name')"
+              aria-describedby="name-error"
+            />
+            @if (showError('name')) {
+              <span id="name-error" class="contact__error" role="alert">
+                Por favor ingresa tu nombre (mínimo 2 caracteres)
+              </span>
+            }
+          </div>
+
+          <!-- ── Campo: Email ──────────────────────────────── -->
+          <div class="contact__field">
+            <label for="contact-email" class="contact__label">
+              Correo Electrónico <span aria-hidden="true">*</span>
+            </label>
+            <input
+              id="contact-email"
+              type="email"
+              formControlName="email"
+              class="contact__input"
+              [class.contact__input--invalid]="showError('email')"
+              placeholder="tu@correo.com"
+              autocomplete="email"
+              [attr.aria-invalid]="showError('email')"
+              aria-describedby="email-error"
+            />
+            @if (showError('email')) {
+              <span id="email-error" class="contact__error" role="alert">
+                Por favor ingresa un correo electrónico válido
+              </span>
+            }
+          </div>
+
+          <!-- ── Campo: Estilo ─────────────────────────────── -->
+          <div class="contact__field contact__field--full">
+            <label for="contact-style" class="contact__label">
+              Estilo de Tatuaje <span aria-hidden="true">*</span>
+            </label>
+            <select
+              id="contact-style"
+              formControlName="style"
+              class="contact__input contact__select"
+              [class.contact__input--invalid]="showError('style')"
+              [attr.aria-invalid]="showError('style')"
+              aria-describedby="style-error"
+            >
+              <option value="">Selecciona un estilo</option>
+              <option value="blackwork">Blackwork / Geométrico</option>
+              <option value="realismo">Realismo</option>
+              <option value="fineline">Fine Line</option>
+              <option value="tradicional">Tradicional / Neotradicional</option>
+              <option value="acuarela">Acuarela</option>
+              <option value="japones">Japonés</option>
+              <option value="otro">Otro / Sin definir</option>
+            </select>
+            @if (showError('style')) {
+              <span id="style-error" class="contact__error" role="alert">
+                Por favor selecciona un estilo
+              </span>
+            }
+          </div>
+
+          <!-- ── Campo: Mensaje ────────────────────────────── -->
+          <div class="contact__field contact__field--full">
+            <label for="contact-message" class="contact__label">
+              Describe Tu Idea <span aria-hidden="true">*</span>
+            </label>
+            <textarea
+              id="contact-message"
+              formControlName="message"
+              class="contact__input contact__textarea"
+              [class.contact__input--invalid]="showError('message')"
+              placeholder="Cuéntanos el diseño que tienes en mente: zona del cuerpo, tamaño aproximado, referencias de imágenes..."
+              rows="5"
+              [attr.aria-invalid]="showError('message')"
+              aria-describedby="message-error"
+            ></textarea>
+            @if (showError('message')) {
+              <span id="message-error" class="contact__error" role="alert">
+                Por favor describe tu idea (mínimo 10 caracteres)
+              </span>
+            }
+          </div>
+        </div>
+
+        <!-- Pie del formulario -->
+        <div class="contact__form-footer">
+          <p class="contact__required-note">
+            <span aria-hidden="true">*</span> Campos requeridos
+          </p>
+          <button type="submit" class="btn-primary">
+            Enviar Mensaje
+          </button>
+        </div>
+      </form>
+    }
+  </div>
+</section>

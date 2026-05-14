@@ -1,0 +1,106 @@
+/*
+ * ESTILOS GALLERY
+ *
+ * Usamos CSS Grid para la cuadrícula.
+ * CSS Grid permite definir filas y columnas en 2D,
+ * a diferencia de Flexbox que es principalmente 1D.
+ *
+ * grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+ * → auto-fill: crea tantas columnas como quepan
+ * → minmax(300px, 1fr): cada columna tiene al menos 300px y como máximo 1 fracción del espacio
+ * Esto hace la grilla automáticamente responsiva sin media queries.
+ */
+
+:host {
+  display: block;
+}
+
+.gallery-section {
+  padding: 6rem 0;
+  background-color: var(--color-dark);
+}
+
+/* ── Grid ────────────────────────────────────────────────────── */
+.gallery__grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+/* ── Ítem individual ─────────────────────────────────────────── */
+.gallery__item {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5; /* Relación de aspecto: más alto que ancho, como fotos de tatuajes */
+  cursor: pointer;
+  background-color: var(--color-dark-gray);
+
+  /* Al hacer hover, escalamos levemente */
+  &:hover,
+  &:focus-within {
+    .gallery__overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .gallery__img {
+      transform: scale(1.05);
+    }
+  }
+}
+
+/* ── Imagen real ─────────────────────────────────────────────── */
+.gallery__img {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* ── Overlay (texto sobre la imagen) ─────────────────────────── */
+.gallery__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    transparent 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.gallery__category {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 0.35rem;
+}
+
+.gallery__title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+/* ── CTA al final de la galería ──────────────────────────────── */
+.gallery__cta {
+  text-align: center;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* En móvil, mostramos el overlay siempre visible (sin hover) */
+  .gallery__overlay {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

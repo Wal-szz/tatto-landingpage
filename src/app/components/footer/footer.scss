@@ -1,0 +1,167 @@
+/*
+ * ESTILOS FOOTER
+ *
+ * El footer usa un grid de 3 columnas en desktop.
+ * La barra de copyright está separada del contenido principal
+ * con un borde superior.
+ */
+
+:host {
+  display: block;
+}
+
+.footer {
+  background-color: #070707;
+  border-top: 1px solid var(--color-gray);
+}
+
+/* ── Contenido principal del footer: 3 columnas ──────────────── */
+.footer__inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr; /* La columna de marca es más ancha */
+  gap: 3rem;
+  padding-top: 4rem;
+  padding-bottom: 3rem;
+}
+
+/* ── Columna de marca ────────────────────────────────────────── */
+.footer__logo {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+  transition: opacity var(--transition);
+
+  &:hover,
+  &:focus-visible {
+    opacity: 0.8;
+    outline: 2px solid var(--color-gold);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+}
+
+.footer__logo-main   { color: var(--color-white); }
+.footer__logo-sep    { color: var(--color-light-gray); font-style: italic; }
+.footer__logo-accent { color: var(--color-gold); }
+
+.footer__tagline {
+  color: var(--color-light-gray);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* ── Columnas de nav y contacto ──────────────────────────────── */
+.footer__nav-title {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-gold);
+  margin-bottom: 1.25rem;
+}
+
+.footer__nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer__link {
+  font-size: 0.9rem;
+  color: var(--color-light-gray);
+  transition: color var(--transition);
+  display: inline-block;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-gold);
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+/* ── Contacto y dirección ────────────────────────────────────── */
+.footer__address {
+  font-style: normal; /* Elimina la cursiva por defecto de <address> */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+
+  p {
+    font-size: 0.9rem;
+    color: var(--color-light-gray);
+  }
+}
+
+/* ── Redes sociales ──────────────────────────────────────────── */
+.footer__social {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.footer__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-mid-gray);
+  color: var(--color-light-gray);
+  transition: border-color var(--transition), color var(--transition), background-color var(--transition);
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+    background-color: var(--color-gold-dim);
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+}
+
+/* ── Barra de copyright ──────────────────────────────────────── */
+.footer__bottom {
+  border-top: 1px solid var(--color-gray);
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+
+  p {
+    font-size: 0.8rem;
+    color: #555;
+  }
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .footer__inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer__brand {
+    grid-column: 1 / -1; /* Ocupa todo el ancho en tablet */
+  }
+}
+
+@media (max-width: 560px) {
+  .footer__inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}

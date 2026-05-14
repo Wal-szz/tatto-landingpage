@@ -1,1 +1,152 @@
-/* You can add global styles to this file, and also import other style files */
+/*
+ * ESTILOS GLOBALES — styles.scss
+ * Aquí definimos variables CSS (custom properties) y estilos base
+ * que se aplican a TODA la aplicación.
+ */
+
+/* ── Variables de diseño ──────────────────────────────────────────
+ * Las variables CSS (:root) son accesibles desde cualquier componente.
+ * Esto nos permite mantener un sistema de diseño consistente.
+ */
+:root {
+  --color-black:      #0a0a0a;
+  --color-dark:       #111111;
+  --color-dark-gray:  #1a1a1a;
+  --color-gray:       #2a2a2a;
+  --color-mid-gray:   #444444;
+  --color-light-gray: #888888;
+  --color-gold:       #C9A84C;
+  --color-gold-light: #e0c06a;
+  --color-gold-dim:   rgba(201, 168, 76, 0.15);
+  --color-white:      #f5f5f5;
+
+  /* Tipografía */
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+
+  /* Transiciones */
+  --transition: 0.3s ease;
+}
+
+/* ── Reset básico ─────────────────────────────────────────────────
+ * Eliminamos márgenes y paddings por defecto del navegador
+ * y usamos box-sizing: border-box para que padding no agrande elementos.
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* scroll-behavior: smooth hace que los enlaces de ancla (#section)
+ * desplacen la página de forma animada en lugar de saltar abruptamente. */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased; /* Mejora la nitidez del texto en macOS/iOS */
+}
+
+/* Todos los encabezados usan la fuente decorativa */
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* ── Clases utilitarias compartidas ──────────────────────────────
+ * Estas clases se usan en múltiples componentes para mantener
+ * consistencia sin repetir estilos.
+ */
+
+/* Contenedor centrado con ancho máximo */
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Título dorado de sección */
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem); /* clamp() adapta el tamaño entre móvil y desktop */
+  color: var(--color-gold);
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+/* Subtítulo gris debajo del título */
+.section-subtitle {
+  text-align: center;
+  color: var(--color-light-gray);
+  margin-bottom: 3rem;
+  font-size: 1.05rem;
+}
+
+/* Botón principal con fondo dorado */
+.btn-primary {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  background-color: var(--color-gold);
+  color: var(--color-black);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: background-color var(--transition), transform var(--transition);
+  border: 2px solid var(--color-gold);
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-gold-light);
+    transform: translateY(-2px);
+    outline: 2px solid var(--color-gold-light);
+    outline-offset: 3px;
+  }
+}
+
+/* Botón secundario con solo borde dorado */
+.btn-secondary {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  background-color: transparent;
+  color: var(--color-gold);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  border: 2px solid var(--color-gold);
+  transition: background-color var(--transition), color var(--transition), transform var(--transition);
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-gold-dim);
+    transform: translateY(-2px);
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+}

@@ -1,0 +1,169 @@
+/*
+ * ESTILOS HERO
+ *
+ * La sección hero ocupa toda la pantalla (100dvh).
+ * dvh = "dynamic viewport height" que en móviles excluye la barra de dirección.
+ *
+ * Las "esferas" de fondo son elementos decorativos posicionados de forma
+ * absoluta con un gradiente radial, creando un efecto de "glow" sutil.
+ */
+
+:host {
+  display: block;
+}
+
+.hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  overflow: hidden; /* Evita que las esferas decorativas causen scroll horizontal */
+
+  /* Gradiente de fondo: negro profundo con un toque más cálido hacia abajo */
+  background: linear-gradient(
+    160deg,
+    var(--color-black) 0%,
+    #0e0c08 100%
+  );
+}
+
+/* ── Decoración de fondo ─────────────────────────────────────── */
+.hero__bg-decor {
+  position: absolute;
+  inset: 0; /* shorthand para top/right/bottom/left: 0 */
+  pointer-events: none; /* Los clics "atraviesan" este elemento decorativo */
+  overflow: hidden;
+}
+
+/* Esferas con gradiente radial que simulan "luces" de fondo */
+.hero__bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px); /* Desenfoque extremo para efecto "glow" */
+
+  &--1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(201, 168, 76, 0.12) 0%, transparent 70%);
+    top: -200px;
+    right: -100px;
+  }
+
+  &--2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
+    bottom: -100px;
+    left: 10%;
+  }
+}
+
+/* ── Contenido ───────────────────────────────────────────────── */
+.hero__content {
+  position: relative; /* z-index funciona solo con position distinto de static */
+  z-index: 1;
+  padding-top: 6rem;  /* Espacio para el navbar fijo */
+  padding-bottom: 4rem;
+}
+
+.hero__eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 1.25rem;
+
+  /* Línea decorativa antes del texto */
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 1px;
+    background-color: var(--color-gold);
+    vertical-align: middle;
+    margin-right: 0.75rem;
+  }
+}
+
+.hero__title {
+  /* clamp(min, preferred, max): tipografía fluida que escala con la pantalla */
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 1.5rem;
+  line-height: 1.05;
+}
+
+/* La parte en itálica con color dorado del título */
+.hero__title-accent {
+  color: var(--color-gold);
+  font-style: italic;
+  display: block; /* Cada parte del título en su propia línea */
+}
+
+.hero__description {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--color-light-gray);
+  max-width: 540px;
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+}
+
+/* ── Botones de acción ───────────────────────────────────────── */
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap; /* En móvil, los botones pasan a nueva línea si no caben */
+  gap: 1rem;
+  margin-bottom: 4rem;
+}
+
+/* ── Estadísticas ────────────────────────────────────────────── */
+.hero__stats {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--color-gray);
+}
+
+.hero__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.hero__stat-number {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  line-height: 1;
+}
+
+.hero__stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-light-gray);
+}
+
+/* Línea divisora vertical entre estadísticas */
+.hero__stat-divider {
+  width: 1px;
+  height: 40px;
+  background-color: var(--color-gray);
+  list-style: none;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .hero__stats {
+    gap: 1.25rem;
+  }
+
+  .hero__stat-number {
+    font-size: 2rem;
+  }
+}

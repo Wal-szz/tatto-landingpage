@@ -1,0 +1,64 @@
+<!--
+  TEMPLATE TEAM
+
+  Presenta a cada artista con una tarjeta (card).
+  Los avatares son SVG generados con las iniciales del artista,
+  ya que no tenemos fotos reales. Usar SVG es más accesible que imágenes vacías.
+-->
+<section id="team" class="team-section" aria-labelledby="team-title">
+  <div class="section-container">
+
+    <h2 id="team-title" class="section-title">Nuestros Artistas</h2>
+    <p class="section-subtitle">
+      Talento, pasión y años de experiencia detrás de cada trazo
+    </p>
+
+    <ul class="team__grid" role="list">
+      @for (artist of artists(); track artist.id) {
+        <li class="team__card">
+
+          <!-- Avatar SVG con iniciales y color de acento único por artista -->
+          <div class="team__avatar" aria-hidden="true">
+            <!--
+              viewBox="0 0 120 120" define el sistema de coordenadas interno del SVG.
+              Esto hace que el SVG sea escalable sin perder proporciones.
+            -->
+            <svg
+              viewBox="0 0 120 120"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              [attr.aria-label]="'Avatar de ' + artist.name"
+            >
+              <!-- Círculo de fondo -->
+              <circle cx="60" cy="60" r="60" fill="#1a1a1a" />
+              <!-- Borde del círculo con el color de acento del artista -->
+              <circle cx="60" cy="60" r="57" fill="none" [attr.stroke]="artist.accentColor" stroke-width="2" />
+              <!-- Texto con las iniciales del artista, centrado en el SVG -->
+              <text
+                x="60"
+                y="68"
+                text-anchor="middle"
+                font-family="Playfair Display, serif"
+                font-size="36"
+                font-weight="700"
+                [attr.fill]="artist.accentColor"
+              >{{ artist.initials }}</text>
+            </svg>
+          </div>
+
+          <div class="team__info">
+            <h3 class="team__name">{{ artist.name }}</h3>
+            <p class="team__role">{{ artist.role }}</p>
+
+            <!-- Especialidades con separador decorativo -->
+            <p class="team__specialty" aria-label="Especialidad: {{ artist.specialty }}">
+              {{ artist.specialty }}
+            </p>
+
+            <p class="team__bio">{{ artist.bio }}</p>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

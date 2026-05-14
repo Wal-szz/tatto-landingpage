@@ -1,0 +1,53 @@
+<!--
+  TEMPLATE GALLERY
+
+  Muestra una grilla de trabajos con CSS Grid.
+  Cada ítem tiene arte decorativo generado con CSS (sin imágenes reales).
+
+  items() → llamamos al signal como función para leer su valor actual.
+  En el template, Angular detecta automáticamente estos signals y actualiza
+  el DOM cuando cambian.
+-->
+<section id="gallery" class="gallery-section" aria-labelledby="gallery-title">
+  <div class="section-container">
+
+    <h2 id="gallery-title" class="section-title">Nuestro Trabajo</h2>
+    <p class="section-subtitle">
+      Una selección de piezas que muestran la versatilidad y calidad de nuestros artistas
+    </p>
+
+    <!--
+      ul/li para la grilla: semánticamente una lista de elementos.
+      role="list" es recomendado cuando se quita el estilo de lista con CSS.
+    -->
+    <ul class="gallery__grid" role="list">
+      <!--
+        @for itera el array items().
+        track item.id → Angular usa el id para identificar cada elemento
+        y solo re-renderizar los que cambian (optimización de rendimiento).
+      -->
+      @for (item of items(); track item.id) {
+        <li class="gallery__item">
+          <!-- Imagen real con lazy load y optimización automática -->
+          <img
+            [ngSrc]="item.src"
+            [alt]="item.alt"
+            class="gallery__img"
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
+
+          <!-- Overlay con información que aparece al hacer hover -->
+          <div class="gallery__overlay">
+            <p class="gallery__category">{{ item.category }}</p>
+            <h3 class="gallery__title">{{ item.title }}</h3>
+          </div>
+        </li>
+      }
+    </ul>
+
+    <div class="gallery__cta">
+      <a href="#contact" class="btn-secondary">¿Quieres uno? Contáctanos</a>
+    </div>
+  </div>
+</section>
