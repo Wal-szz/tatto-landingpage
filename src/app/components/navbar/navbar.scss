@@ -46,7 +46,7 @@
   letter-spacing: 0.02em;
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.5rem;
   transition: opacity var(--transition);
 
   &:hover,
@@ -55,6 +55,18 @@
     outline: 2px solid var(--color-gold);
     outline-offset: 4px;
     border-radius: 2px;
+  }
+}
+
+.navbar__logo-icon {
+  width: 18px;
+  height: 32px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 6px rgba(201, 168, 76, 0.4));
+  transition: filter var(--transition);
+
+  .navbar__logo:hover & {
+    filter: drop-shadow(0 0 10px rgba(201, 168, 76, 0.7));
   }
 }
 
